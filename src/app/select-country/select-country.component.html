@@ -1,0 +1,41 @@
+<button mat-button routerLink="/countries-info">Go to Countries Stats</button>
+
+<button mat-button routerLink="/countries-info-advanced">Go to Countries Stats Advanced</button>
+
+
+<table mat-table [dataSource]="countries">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <!-- Area Column -->
+  <ng-container matColumnDef="area">
+    <th mat-header-cell *matHeaderCellDef>Area</th>
+    <td mat-cell *matCellDef="let element">{{element.area}}</td>
+  </ng-container>
+
+  <!-- CountryCode Column -->
+  <ng-container matColumnDef="countryCode">
+    <th mat-header-cell *matHeaderCellDef>Country Code</th>
+    <td mat-cell *matCellDef="let element">{{element.countryCode}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+		<td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="launchCountry(element)">
+        <mat-icon>launch</mat-icon>
+      </button>
+    </td>
+	</ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
